@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="FormController">
+    <form name="myForm" novalidate>
+        <label>Name:</label>
+        <input type="text" name="name" ng-model="user.name" required>
+        <span ng-show="myForm.name.$error.required && myForm.name.$dirty">Name is required.</span>
+        <br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" ng-model="user.email" required>
+        <span ng-show="myForm.email.$error.required && myForm.email.$dirty">Email is required.</span>
+
+        <br><br>
+
+        <button ng-click="submitForm()" ng-disabled="!myForm.$valid">Submit</button>
+    </form>
+</div>
+
+<script>
+    var app = angular.module('myApp', []);
+
+    app.controller('FormController', function($scope) {
+        $scope.user = {};
+
+        $scope.submitForm = function() {
+            if ($scope.myForm.$valid) {
+                // Form is valid, perform form submission logic here
+                alert('Form submitted successfully!');
+            } else {
+                // Form is invalid, display error messages
+                alert('Form has errors. Please correct them.');
+            }
+        };
+    });
+</script>
+
+</body>
+</html>
